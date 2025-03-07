@@ -1,25 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import GoogleAuthButton from './Components/GoogleAuthButton/GoogleAuthButton';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+
+const App = () => {
+    const handleSuccess = (response) => {
+        console.log('Authentication successful:', response);
+        // Send the token to the backend for verification
+    };
+
+    const handleFailure = (error) => {
+        console.error('Authentication failed:', error);
+    };
+
+    return (
+        <div>
+            <h1>Welcome to My App</h1>
+            <GoogleAuthButton onSuccess={handleSuccess} onFailure={handleFailure} />
+        </div>
+    );
+};
 
 export default App;
