@@ -1,22 +1,53 @@
-import React from 'react';
+import React, { useState } from 'react';
 import GoogleAuthButton from './Components/GoogleAuthButton/GoogleAuthButton';
+import TodoList from './Components/TodoList/TodoList';
+// import GoogleLogin from 'react-google-login';
+import { GoogleLogin } from '@react-oauth/google';
+import TodoListt from './Components/TodoListt/TodoListt';
+import UserList from './Components/UserList/UserList';
 
 
 const App = () => {
-    const handleSuccess = (response) => {
-        console.log('Authentication successful:', response);
-        // Send the token to the backend for verification
+   
+    // const responseMessage = (response) => {
+    //     console.log(response);
+    // };
+    // const errorMessage = (error) => {
+    //     console.log(error);
+    // };
+    const [inputValue, setInputValue] = useState('');
+    const [message, setMessage] = useState('');
+  
+    const handleChange = (event) => {
+      setInputValue(event.target.value);
     };
-
-    const handleFailure = (error) => {
-        console.error('Authentication failed:', error);
+  
+    const handleSubmit = () => {
+        setMessage(`You entered: ${inputValue}`);
+      
     };
 
     return (
-        <div>
-            <h1>Welcome to My App</h1>
-            <GoogleAuthButton onSuccess={handleSuccess} onFailure={handleFailure} />
-        </div>
+        // <div>
+        //     <h1>Welcome to My App</h1>
+        //     <TodoList />
+        //     <br />
+        //     <div>
+        //     <h2>React Google Login</h2>
+        //     <br />
+        //     <br />
+        //     <GoogleLogin onSuccess={responseMessage} onError={errorMessage} />
+        //     </div>
+        //     <TodoListt />
+        //     <UserList />
+        // </div>
+        <div className="App">
+           
+        <input type="text" value={inputValue} onChange={handleChange} />
+        <br />
+        <button onClick={handleSubmit}>Submit</button>
+        <p>{message}</p>
+      </div>
     );
 };
 
